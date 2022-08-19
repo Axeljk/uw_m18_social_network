@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Package-lock is unnecessary for a basic homework assignment.
+package-lock.json

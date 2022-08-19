@@ -1,0 +1,21 @@
+{
+  "name": "uw-m18-social-network-api",
+  "version": "1.0.0",
+  "description": "Social Network API utilizing a NoSQL database to maximize flexability as your network grows.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Axeljk/uw_m18_social_network.git"
+  },
+  "author": "Axeljk",
+  "license": "MIT",
+  "homepage": "https://github.com/Axeljk/uw_m18_social_network#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.5.2"
+  }
+}
