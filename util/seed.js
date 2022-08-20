@@ -19,8 +19,17 @@ const thoughtSeed = [
 	{
 		thoughtText: "I was thinking.",
 		username: "Axeljk"
+	},
+	{
+		thoughtText: "foobar.",
+		username: "foo"
 	}
 ];
+
+function getThoughts(user) {
+	Thought.find({ username: user})
+		.then(thoughts => thoughts.map(e => e._id))
+}
 
 const userSeed = [
 	{
@@ -46,6 +55,17 @@ const seedDatabase = async () => {
 	await Thought.insertMany(thoughtSeed);
 	await User.deleteMany({});
 	await User.insertMany(userSeed);
+
+	// Garbage way to seed thoughts by _id.
+	const brain = await getThoughts("Axeljk");
+	await User.findOneAndUpdate(
+		{ username: "Axeljk" },
+		{ $addToSet: { thoughts: brain } })
 };
 
-seedDatabase().then(() => mongoose.connection.close());
+seedDatabase()
+	.then(() => {
+		mongoose.connection.close();
+		console.log("Seeding complete!");
+		process.exit(0);
+	});
