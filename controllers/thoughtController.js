@@ -63,7 +63,7 @@ const thoughtController = {
 			.catch(err => res.status(500).json(err));
 	},
 	removeReaction(req, res) {
-		Thought.findOneAndUpdate({ _id: req.params.id }, { $pull: { reactions: req.params.reactionId }})
+		Thought.findOneAndUpdate({ _id: req.params.id }, { $pull: { reactions: { reactionId : req.params.reactionId }}})
 		.then(thought => {
 			if (thought)
 				return res.json(thought);

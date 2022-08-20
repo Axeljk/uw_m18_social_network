@@ -4,6 +4,7 @@ const userController = {
 	getUsers(req, res) {
 		User.find()
 			.populate("friends")
+			.populate("thoughts")
 			.then(users => res.json(users))
 			.catch(err => res.status(500).json(err));
 	},
@@ -15,6 +16,7 @@ const userController = {
 	getUser(req, res) {
 		User.findOne({ _id: req.params.id })
 			.populate("friends")
+			.populate("thoughts")
 			.then((user) => {
 				if (user)
 					return res.json(user);
