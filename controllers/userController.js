@@ -5,7 +5,44 @@ const userController = {
 		User.find()
 			.then(users => res.json(users))
 			.catch(err => res.status(500).json(err));
-	}
+	},
+	createUser(req, res) {
+		User.create(req.body)
+			.then(user => res.json(user))
+			.catch(err => res.status(500).json(err));
+	},
+	getUser(req, res) {
+		User.findOne({ _id: req.params.id })
+			.select("-__v")
+			.then((user) => {
+				if (user)
+					return res.json(user);
+				else
+					return res.status(404).json({ message: "No user with that ID." });
+			})
+			.catch(err => res.status(500).json(err));
+	},
+	updateUser(req, res) {
+		User.findOneAndUpdate({ _id: req.params.id }, { $set: req.body })
+			.then(user => {
+				if (user)
+					return res.json(user);
+				else
+					return res.status(404).json({ message: "No user with that ID." });
+			})
+			.catch(err => res.status(500).json(err));
+	},
+	deleteUser(req, res) {
+		User.findOneAndRemove({ _id: req.params.id })
+			.then(user => {
+				if (user)
+					return res.json({ message: "User successfully deleted." });
+				else
+					return res.status(404).json({ message: "No user with that ID." });
+			})
+			.catch(err => res.status(500).json(err));
+	},
+
 }
 
 module.exports = userController;
